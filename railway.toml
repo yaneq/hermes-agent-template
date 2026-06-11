@@ -3,7 +3,10 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "/app/start.sh"
+# No startCommand: Railway's startCommand bypasses the image ENTRYPOINT, which
+# would skip tini and leave the gateway as PID 1 with no zombie reaping (hermes
+# spawns tool subprocesses; orphaned grandchildren would accumulate until the
+# PID table fills). With no override, Docker runs ENTRYPOINT tini -g -- start.sh.
 # No healthcheckPath: this fork runs the Slack/messaging gateway as the main
 # process and exposes no HTTP server. Railway supervises via the restart
 # policy — gateway exit = container exit = restart.
