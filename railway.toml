@@ -4,7 +4,8 @@ dockerfilePath = "Dockerfile"
 
 [deploy]
 startCommand = "/app/start.sh"
-healthcheckPath = "/health"
-healthcheckTimeout = 300
+# No healthcheckPath: this fork runs the Slack/messaging gateway as the main
+# process and exposes no HTTP server. Railway supervises via the restart
+# policy — gateway exit = container exit = restart.
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10

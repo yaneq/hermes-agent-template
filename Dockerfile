@@ -62,13 +62,10 @@ RUN git clone --depth 1 --branch ${HERMES_REF} https://github.com/NousResearch/h
 # - We keep ui-tui/ entirely (node_modules + dist + src) so HERMES_TUI_DIR
 #   can point at it (see below).
 
-COPY requirements.txt /app/requirements.txt
-RUN uv pip install --system --no-cache -r /app/requirements.txt
-
+# Zonic fork: the admin web server (server.py + templates + starlette deps)
+# is removed — the gateway runs as the service main process (see start.sh).
 RUN mkdir -p /data/.hermes
 
-COPY server.py /app/server.py
-COPY templates/ /app/templates/
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 

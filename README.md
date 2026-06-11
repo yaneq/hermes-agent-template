@@ -1,4 +1,10 @@
-# Hermes Agent — Railway Template
+# Hermes Agent — Railway Template (Zonic fork)
+
+> **Zonic fork:** runs `hermes gateway run` as the service's **main process** — the
+> upstream admin web server (`server.py`) is removed. Config is owned by the volume
+> (`/data/.hermes/config.yaml` + `.env`) and is never rewritten at boot. See
+> [CHANGES.md](./CHANGES.md) for why and what changed. The upstream feature list
+> below is kept for reference; admin-dashboard items no longer apply.
 
 Deploy [Hermes Agent](https://github.com/NousResearch/hermes-agent) on [Railway](https://railway.app) with a web-based admin dashboard for configuration, gateway management, and user pairing.
 
